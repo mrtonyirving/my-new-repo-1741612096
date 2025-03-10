@@ -1,0 +1,25 @@
+ INFO  Accepting connections at http://localhost:8082
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 GET /
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 Returned 200 in 13 ms
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 GET /_expo/static/css/global-f72a62d2075c8088ba50a67e66d8290e.css
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 Returned 200 in 2 ms
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 GET /_expo/static/js/web/index-a499d4475543163afdda1645928bfc09.js
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 Returned 200 in 3 ms
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 GET /assets/public/icosahedron.ea5d98412472b7885d87e61ee4b67a63.svg
+ HTTP  3/10/2025 1:01:19 PM 172.20.0.1 Returned 200 in 3 ms
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 GET /
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 Returned 304 in 1 ms
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 GET /_expo/static/css/global-f72a62d2075c8088ba50a67e66d8290e.css
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 Returned 304 in 1 ms
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 GET /_expo/static/js/web/index-a499d4475543163afdda1645928bfc09.js
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 Returned 304 in 0 ms
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 GET /assets/public/icosahedron.ea5d98412472b7885d87e61ee4b67a63.svg
+ HTTP  3/10/2025 1:07:09 PM 172.20.0.1 Returned 304 in 1 ms
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 GET /
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 Returned 200 in 9 ms
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 GET /_expo/static/css/global-f72a62d2075c8088ba50a67e66d8290e.css
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 Returned 304 in 0 ms
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 GET /_expo/static/js/web/index-a499d4475543163afdda1645928bfc09.js
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 Returned 304 in 1 ms
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 GET /assets/public/icosahedron.ea5d98412472b7885d87e61ee4b67a63.svg
+ HTTP  3/10/2025 1:08:34 PM 172.20.0.1 Returned 304 in 0 ms
