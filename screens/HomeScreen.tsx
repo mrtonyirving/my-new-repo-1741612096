@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   View,
@@ -13,20 +12,10 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { useGifts } from '../context/GiftContext';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
-type RootStackParamList = {
-  HomeScreen: undefined;
-  GiftList: { listId: string };
-};
-
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'HomeScreen'>;
-
-interface HomeScreenProps {
-  navigation: HomeScreenNavigationProp;
-}
-
-const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+const HomeScreen = () => {
+  const navigation = useNavigation();
   const { lists, addList } = useGifts();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newListName, setNewListName] = useState('');

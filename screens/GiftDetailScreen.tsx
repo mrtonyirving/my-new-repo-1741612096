@@ -33,29 +33,32 @@ type RootStackParamList = {
   };
 };
 
-type GiftDetailScreenProps = {
-  route: RouteProp<RootStackParamList, 'GiftDetail'>;
-  navigation: NativeStackNavigationProp<RootStackParamList>;
-};
+type GiftDetailScreenRouteProp = RouteProp<RootStackParamList, 'GiftDetail'>;
+type GiftDetailScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'GiftDetail'>;
 
-const GiftDetailScreen: React.FC<GiftDetailScreenProps> = ({ route, navigation }) => {
+interface Props {
+  route: GiftDetailScreenRouteProp;
+  navigation: GiftDetailScreenNavigationProp;
+}
+
+const GiftDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const { gift, listId } = route.params;
   const [priceHistory, setPriceHistory] = useState<PriceHistoryEntry[]>([]);
 
-  const loadPriceHistory = async () => {
-    try {
-      const history = await AsyncStorage.getItem(`priceHistory-${gift.id}`);
-      if (history) {
-        setPriceHistory(JSON.parse(history));
-      }
-    } catch (error) {
-      console.error('Error loading price history:', error);
-    }
-  };
-
   useEffect(() => {
+    const loadPriceHistory = async () => {
+      try {
+        const history = await AsyncStorage.getItem(`priceHistory-${gift.id}`);
+        if (history) {
+          setPriceHistory(JSON.parse(history));
+        }
+      } catch (error) {
+        console.error('Error loading price history:', error);
+      }
+    };
+
     loadPriceHistory();
-  }, [loadPriceHistory]);
+  }, [gift.id]);
 
   const handlePriceUpdate = async (newPrice: number) => {
     const updatedHistory = [
@@ -76,9 +79,9 @@ const GiftDetailScreen: React.FC<GiftDetailScreenProps> = ({ route, navigation }
       const giftLists = await AsyncStorage.getItem('giftLists');
       if (giftLists) {
         const lists = JSON.parse(giftLists);
-        const updatedLists = lists.map((list: any) => {
+        const updatedLists = lists.map((list: { id: string; gifts: Gift[] }) => {
           if (list.id === listId) {
-            const updatedGifts = list.gifts.map((g: Gift) => {
+            const updatedGifts = list.gifts.map(g => {
               if (g.id === gift.id) {
                 return { ...g, price: newPrice };
               }
@@ -119,7 +122,7 @@ const GiftDetailScreen: React.FC<GiftDetailScreenProps> = ({ route, navigation }
                 {
                   text: 'Update',
                   onPress: (newPrice) => {
-                    if (newPrice && !isNaN(parseFloat(newPrice))) {
+                    if (newPrice && !isNaN(Number(newPrice))) {
                       handlePriceUpdate(parseFloat(newPrice));
                     }
                   },
@@ -165,13 +168,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#2E7D32',
   },
   giftName: {
-    fontFamily: 'PlayfairDisplay',
+    fontFamily: 'NewYork',
     fontSize: 24,
     color: '#FFFFFF',
     marginBottom: 8,
   },
   recipient: {
-    fontFamily: 'Inter',
+    fontFamily: 'SF-Pro',
     fontSize: 16,
     color: '#FFFFFF',
     opacity: 0.9,
@@ -183,13 +186,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E0E0E0',
   },
   sectionTitle: {
-    fontFamily: 'Inter',
+    fontFamily: 'SF-Pro',
     fontSize: 18,
     color: '#212121',
     marginBottom: 12,
   },
   price: {
-    fontFamily: 'RobotoMono',
+    fontFamily: 'SF-Mono',
     fontSize: 32,
     color: '#2E7D32',
     marginBottom: 16,
@@ -202,7 +205,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   updateButtonText: {
-    fontFamily: 'Inter',
+    fontFamily: 'SF-Pro',
     fontSize: 16,
     color: '#FFFFFF',
     marginLeft: 8,
@@ -219,12 +222,12 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   historyPrice: {
-    fontFamily: 'RobotoMono',
+    fontFamily: 'SF-Mono',
     fontSize: 16,
     color: '#212121',
   },
   historyDate: {
-    fontFamily: 'Inter',
+    fontFamily: 'SF-Pro',
     fontSize: 14,
     color: '#757575',
   },
@@ -232,7 +235,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   notes: {
-    fontFamily: 'Inter',
+    fontFamily: 'SF-Pro',
     fontSize: 16,
     color: '#212121',
     lineHeight: 24,

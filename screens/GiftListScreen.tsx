@@ -10,23 +10,24 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationProp, RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 
 type RootStackParamList = {
   GiftDetail: { gift: Gift; listId: string };
   AddGift: { listId: string };
 };
 
-interface Gift {
+type Gift = {
   id: string;
   name: string;
   recipient: string;
   price: string;
-}
+};
 
 interface GiftListScreenProps {
   route: RouteProp<{ params: { listId: string } }, 'params'>;
-  navigation: NavigationProp<RootStackParamList>;
+  navigation: StackNavigationProp<RootStackParamList>;
 }
 
 const GiftListScreen: React.FC<GiftListScreenProps> = ({ route, navigation }) => {
@@ -34,32 +35,32 @@ const GiftListScreen: React.FC<GiftListScreenProps> = ({ route, navigation }) =>
   const [gifts, setGifts] = useState<Gift[]>([]);
   const [totalBudget, setTotalBudget] = useState(0);
 
-  const loadGifts = async () => {
-    try {
-      const giftLists = await AsyncStorage.getItem('giftLists');
-      if (giftLists) {
-        const lists = JSON.parse(giftLists);
-        const currentList = lists.find(list => list.id === listId);
-        if (currentList) {
-          setGifts(currentList.gifts);
-          calculateTotalBudget(currentList.gifts);
-        }
-      }
-    } catch (error) {
-      console.error('Error loading gifts:', error);
-    }
-  };
-
   useEffect(() => {
+    const loadGifts = async () => {
+      try {
+        const giftLists = await AsyncStorage.getItem('giftLists');
+        if (giftLists) {
+          const lists = JSON.parse(giftLists);
+          const currentList = lists.find(list => list.id === listId);
+          if (currentList) {
+            setGifts(currentList.gifts);
+            calculateTotalBudget(currentList.gifts);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading gifts:', error);
+      }
+    };
+
     loadGifts();
-  }, [listId, loadGifts]);
+  }, [listId]);
 
   const calculateTotalBudget = (giftsList: Gift[]) => {
     const total = giftsList.reduce((sum, gift) => sum + Number(gift.price), 0);
     setTotalBudget(total);
   };
 
-  const handleDeleteGift = async (giftId: string) => {
+  const handleDeleteGift = (giftId: string) => {
     Alert.alert(
       'Delete Gift',
       'Are you sure you want to delete this gift?',
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E0E0E0',
   },
   budgetText: {
-    fontFamily: 'RobotoMono',
+    fontFamily: 'SF-Mono',
     fontSize: 20,
     color: '#2E7D32',
     textAlign: 'center',
@@ -180,13 +181,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   giftName: {
-    fontFamily: 'Inter',
+    fontFamily: 'SF-Pro',
     fontSize: 18,
     color: '#212121',
     marginBottom: 4,
   },
   giftRecipient: {
-    fontFamily: 'Inter',
+    fontFamily: 'SF-Pro',
     fontSize: 14,
     color: '#757575',
   },
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   priceText: {
-    fontFamily: 'RobotoMono',
+    fontFamily: 'SF-Mono',
     fontSize: 16,
     color: '#2E7D32',
     marginRight: 8,
