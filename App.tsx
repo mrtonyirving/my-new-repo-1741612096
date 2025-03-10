@@ -13,9 +13,9 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    'Inter': require('./assets/fonts/SF-Pro.ttf'),
-    'PlayfairDisplay': require('./assets/fonts/NewYork.ttf'),
-    'RobotoMono': require('./assets/fonts/SF-Mono-Regular.otf'),
+    'SF-Pro': require('./assets/fonts/SF-Pro.ttf'),
+    'NewYork': require('./assets/fonts/NewYork.ttf'),
+    'SF-Mono': require('./assets/fonts/SF-Mono-Regular.otf'),
   });
 
   if (!fontsLoaded) {
@@ -31,9 +31,13 @@ export default function App() {
           headerStyle: {
             backgroundColor: '#FFFFFF',
           },
-          headerTintColor: '#212121',
+          headerTintColor: '#2E7D32',
           headerTitleStyle: {
-            fontFamily: 'PlayfairDisplay',
+            fontFamily: 'NewYork',
+            fontSize: 20,
+          },
+          contentStyle: {
+            backgroundColor: '#FFFFFF',
           },
         }}
       >
